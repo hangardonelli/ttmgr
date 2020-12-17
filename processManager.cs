@@ -12,6 +12,8 @@ namespace ttmgr
     /// <summary>
     ///  This class contains the main process handling and information methods.
     /// </summary>
+    /// 
+    
     class ProcessManager
     {
        

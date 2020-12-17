@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
+using System.IO;
 
 
 namespace ttmgr
@@ -45,5 +46,23 @@ namespace ttmgr
             return ByteArrayToString(md5Bytes);
 
         }
+
+        public string FileToMD5(string patch)
+        {
+            FileStream file = File.OpenRead(patch);
+            MD5 md5 = MD5.Create();
+
+            byte[] md5Bytes = md5.ComputeHash(file);
+            StringBuilder sb = new StringBuilder();
+
+            foreach (byte md5Byte in md5Bytes)
+            {
+                sb.Append(md5Byte.ToString("x2"));
+            }
+
+            return sb.ToString();
+        }
+        
+
     }
 }
