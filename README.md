@@ -1,2 +1,2 @@
 # ttmgr
-A Terminal-based C# task manager application
+A Terminal-based C# Task Manager Application
