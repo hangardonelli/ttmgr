@@ -9,7 +9,7 @@ using System.IO;
 
 namespace ttmgr
 {
-    class Crypto
+    abstract class Crypto
     {
 
         protected byte[] StringToByte(string input)
@@ -62,7 +62,28 @@ namespace ttmgr
 
             return sb.ToString();
         }
-        
+    }
+
+    class SHA256Handler
+    {
+        public string FileToSHA256(string patch)
+        {
+
+            FileStream file = File.OpenRead(patch);
+            SHA256 sha256 = SHA256.Create();
+
+            byte[] sha256Bytes = sha256.ComputeHash(file);
+            StringBuilder sb = new StringBuilder();
+
+            foreach(byte sha256byte in sha256Bytes)
+            {
+                sb.Append(sha256byte.ToString("x2"));
+            }
+
+            return sb.ToString();
+         
+        } 
+      
 
     }
 }
