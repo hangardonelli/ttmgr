@@ -1,0 +1,7 @@
+C:\Users\Usuario\source\repos\ttmgr\ttmgr\obj\Debug\ttmgr.csprojAssemblyReference.cache
+C:\Users\Usuario\source\repos\ttmgr\ttmgr\obj\Debug\ttmgr.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\source\repos\ttmgr\ttmgr\bin\Debug\ttmgr.exe.config
+C:\Users\Usuario\source\repos\ttmgr\ttmgr\bin\Debug\ttmgr.exe
+C:\Users\Usuario\source\repos\ttmgr\ttmgr\bin\Debug\ttmgr.pdb
+C:\Users\Usuario\source\repos\ttmgr\ttmgr\obj\Debug\ttmgr.exe
+C:\Users\Usuario\source\repos\ttmgr\ttmgr\obj\Debug\ttmgr.pdb
