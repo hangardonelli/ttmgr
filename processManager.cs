@@ -39,6 +39,41 @@ namespace ttmgr
            
         }
 
+        protected int getProcessPriority(Process process)
+        {
+            return process.BasePriority;
+        }
+
+
+        protected string getPriorityById(int priority)
+        {
+            switch (priority)
+            {
+                case 4:
+                    return "Idle";
+                case 8:
+                    return "Normal";
+                case 13:
+                    return "High";
+                case 24:
+                    return "Real-Time";
+                default:
+                    return "UNKNOW_PROCESS_PRIORITY";
+            }
+        }
+
+        protected string getProcessWindowsTitle(Process process)
+        {
+            return process.MainWindowTitle;
+        }
+
+        protected string getProcessPatch(Process process)
+        {
+            return process.MainModule.FileName;
+        }
+
+       
+
         
         public string[] getAllProcessName(Process[] processes)
         {

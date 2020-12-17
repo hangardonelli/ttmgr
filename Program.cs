@@ -19,7 +19,7 @@ namespace ttmgr
             Process process = new Process();
 
             Console.WriteLine(Process.GetProcessesByName("chrome")[15].PriorityClass);
-            Console.WriteLine(Process.GetProcessesByName("chrome")[15].Modules);
+            //Console.WriteLine(Process.GetProcessesByName("chrome")[15].Modules);
 
             Console.ReadKey();
 
