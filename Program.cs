@@ -23,11 +23,11 @@ namespace ttmgr
 
             Process process = new Process();
 
-            SHA256Handler sha256 = new SHA256Handler();
+            HashHandler sha256 = new HashHandler();
 
             string patch = Process.GetProcessesByName("chrome")[10].MainModule.FileName;
 
-            Console.WriteLine(sha256.FileToSHA256(patch));
+            Console.WriteLine(sha256.FileToSHA512(patch));
 
 
 
