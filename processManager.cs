@@ -47,6 +47,10 @@ namespace ttmgr
             return Process.GetProcessesByName(processName);
         }
 
+        protected Process getProcessById(int processID)
+        {
+            return Process.GetProcessById(processID);
+        }
         protected int getProcessPriority(Process process)
         {
             return process.BasePriority;
@@ -85,7 +89,7 @@ namespace ttmgr
         
         public string[] getAllProcessName(Process[] processes)
         {
-            /*
+           /*
            * Purpose: Returns an array of Strings with the name of the process that are running by 'processes' argument.
            */
             var processNames = new string[processes.Length];
@@ -108,30 +112,56 @@ namespace ttmgr
 
     class ProcessAction : ProcessManager
     {
-        public void KillProcessByName(string processName)
+
+        public void KillProcessById(int processID)
         {
+            /*
+             * Purpose: Kill a process determined by its ID
+             * Parameters:
+             *      processID: The ID of the process to be killed
+             * Exceptions:
+             *      There may be an exception related to the access denied, or that the process does not exist directly
+             * */
+             try
+             {
+                // Search the process by his ID, and kill him :))
+                Process process = Process.GetProcessById(processID);
+                 process.Kill();
+
+                 Console.WriteLine($"[INFO]: Process {getProcessName(process)} with ID {processID} has been killed succesfully");
+             }
+             catch(Exception)
+             {
+                 Console.WriteLine($"[ERROR]: Failed while trying to kill process with ID {processID}. Process ID Does not exist or accces denied.");
+
+             }
+
+         }
+         public void KillProcessByName(string processName)
+         {
+            // Search the process by his name
             Process[] processes = getProcessFamilyByName(processName);
-            if (!(processes.Length > 0))
-            {
-                //Check if a valid/running process name was given in processName argument  
-                Console.WriteLine($"[ERROR] No processes has been founded with name {processName} ");
-                return;
-            }
-            for (int i = 0; i < processes.Length; i++)
-            {
-                //Going through the array of processes with the indicated name and try to eliminate all
-                 
-                try
-                {
-                    processes[i].Kill();
-                    Console.WriteLine($"[INFO]: Process {processName} at instance {i} has been killed");
-                }
-                catch (Exception ex)
-                {
-                    /*A process may not be killed because the program does not have permissions to do so,
-                     * either because it was not run as administrator, or because it has access denied
-                     * (for example, trying to stop an antivrius)
-                     * */
+             if (!(processes.Length > 0))
+             {
+                 //Check if a valid/running process name was given in processName argument  
+                 Console.WriteLine($"[ERROR] No processes has been founded with name {processName} ");
+                 return;
+             }
+             for (int i = 0; i < processes.Length; i++)
+             {
+                 //Going through the array of processes with the indicated name and try to eliminate all
+
+                 try
+                 {
+                     processes[i].Kill();
+                     Console.WriteLine($"[INFO]: Process {processName} at instance {i} has been killed succesfully");
+                 }
+                 catch (Exception ex)
+                 {
+                     /*A process may not be killed because the program does not have permissions to do so,
+                      * either because it was not run as administrator, or because it has access denied
+                      * (for example, trying to stop an antivrius)
+                      * */
                     Console.WriteLine($"[WARNING]: Error while trying to kill process {processName} at instance {i}");
                     Console.WriteLine($"[INFO]: Exception: {ex.Message}");
 
@@ -171,6 +201,7 @@ namespace ttmgr
                 string[] processArray = getAllProcessName(getAllProcess());
                 foreach(string process in processArray)
                 {
+
                 
                 }
 
