@@ -27,15 +27,11 @@ namespace ttmgr
             HashHandler sha256 = new HashHandler();
             FileManager fm = new FileManager();
 
-            string patch = Process.GetProcessesByName("chrome")[10].MainModule.FileName;
+            ProcessAction pa = new ProcessAction();
 
+            pa.KillProcessByName("chroasdadsdsdme");
 
-            FileStream file = File.OpenRead(patch);
-
-            Console.WriteLine("El nombre del archivo es: " + fm.GetFileSize(patch, "bytes"));
             
-            
-
 
 
             

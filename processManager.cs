@@ -34,11 +34,17 @@ namespace ttmgr
         protected int getProcessID(Process process)
         {
             return process.Id;
+            
         }
         protected string getProcessName(Process process)
         {
             return process.ProcessName;
            
+        }
+
+        protected Process[] getProcessFamilyByName(string processName)
+        {
+            return Process.GetProcessesByName(processName);
         }
 
         protected int getProcessPriority(Process process)
@@ -97,6 +103,42 @@ namespace ttmgr
 
 
         
+    }
+
+
+    class ProcessAction : ProcessManager
+    {
+        public void KillProcessByName(string processName)
+        {
+            Process[] processes = getProcessFamilyByName(processName);
+            if (!(processes.Length > 0))
+            {
+                //Check if a valid/running process name was given in processName argument  
+                Console.WriteLine($"[ERROR] No processes has been founded with name {processName} ");
+                return;
+            }
+            for (int i = 0; i < processes.Length; i++)
+            {
+                //Going through the array of processes with the indicated name and try to eliminate all
+                 
+                try
+                {
+                    processes[i].Kill();
+                    Console.WriteLine($"[INFO]: Process {processName} at instance {i} has been killed");
+                }
+                catch (Exception ex)
+                {
+                    /*A process may not be killed because the program does not have permissions to do so,
+                     * either because it was not run as administrator, or because it has access denied
+                     * (for example, trying to stop an antivrius)
+                     * */
+                    Console.WriteLine($"[WARNING]: Error while trying to kill process {processName} at instance {i}");
+                    Console.WriteLine($"[INFO]: Exception: {ex.Message}");
+
+                }
+            }
+            Console.WriteLine("[INFO]: Done!");
+        }
     }
 
     /// <summary>

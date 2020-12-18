@@ -31,6 +31,8 @@ namespace ttmgr
 
             FileStream file = File.OpenRead(patch);
 
+            
+
             switch (unit)
             {
                 case "bits":
