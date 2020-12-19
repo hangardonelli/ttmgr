@@ -84,8 +84,50 @@ namespace ttmgr
             return process.MainModule.FileName;
         }
 
-       
+        protected bool isProcessResponding(Process process)
+        {
+            return process.Responding;
+        }
 
+        protected DateTime getProcessStartDate(Process process)
+        {
+            return process.StartTime;
+        }
+       
+        public string getStartingMemoryLocation(Process process, byte _base = 16)
+        {
+            /*
+             * Purpose: Returns the initial memory location of a specific process
+             * Parameters:
+             *      process: The selected process to see his initial memory location
+             */
+            //Saving the memory location expressed like a 64-bits pointer into a int64 data type.
+            Int64 processMemoryLocation = process.MainModule.BaseAddress.ToInt64();
+
+
+           
+
+            switch (_base)
+            {
+
+                case 2:
+                    //Converting to bianry
+                    return Convert.ToString(processMemoryLocation, 2);
+                case 8:
+                    //Converting to octal (please dont use this >_>)
+                    return Convert.ToString(processMemoryLocation, 8);
+                case 16:
+                    //Converting to hexdec
+                    return processMemoryLocation.ToString("X");
+                
+
+                default:
+                    // If you were to cause the execution of this default:, you don't even deserve to be alive wtf man
+                    return "UNKNOW_BASE_SYSTEM";
+            }
+
+
+        }
         
         public string[] getAllProcessName(Process[] processes)
         {
@@ -127,6 +169,7 @@ namespace ttmgr
                 // Search the process by his ID, and kill him :))
                 Process process = Process.GetProcessById(processID);
                  process.Kill();
+                
 
                  Console.WriteLine($"[INFO]: Process {getProcessName(process)} with ID {processID} has been killed succesfully");
              }

@@ -29,12 +29,17 @@ namespace ttmgr
 
             ProcessAction pa = new ProcessAction();
 
-            pa.KillProcessByName("chroasdadsdsdme");
+            Process chrome = Process.GetProcessesByName("chrome")[0];
+            Console.WriteLine(Convert.ToString(chrome.MainModule.BaseAddress.ToInt64(), 16));
+         
 
-            
 
 
-            
+
+
+
+
+
             Console.ReadKey();
 
           
