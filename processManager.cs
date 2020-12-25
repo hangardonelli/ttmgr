@@ -232,6 +232,51 @@ namespace ttmgr
 
         }
 
+
+
+        public void printProcessInformation(
+            Process process,
+            bool showID = true,
+            bool showName = true,
+            bool showPriority = false,
+            bool showPatch = false,
+            bool showInstances = false, 
+            bool showWindowsTitle = false
+            )
+
+        {
+            if (showID)
+            {
+                Console.WriteLine($"Process ID: {getProcessID(process)}");
+            }
+
+            if (showName)
+            {
+                Console.WriteLine($"Process Name: {getProcessName(process)}");
+            }
+
+            if (showPriority)
+            {
+                Console.WriteLine($"Priority: {getProcessPriority(process)} ({getPriorityById(getProcessPriority(process))})");
+            }
+
+            if (showPatch)
+            {
+                Console.WriteLine($"File Patch: {getProcessPatch(process)}");
+            }
+
+            if (showInstances)
+            {
+                Console.WriteLine($"Process Instances: {getProcessFamilyByName(process.ProcessName).Length}");
+            }
+
+            if (showWindowsTitle)
+            {
+                Console.WriteLine($"Main title name: {getProcessWindowsTitle(process)}");
+            }
+        }
+
+
         public void printAllProcessInformation(
             bool showID = true,
             bool showName = true,
@@ -252,9 +297,3 @@ namespace ttmgr
 
     }
 }
-
-
-
-
-
-

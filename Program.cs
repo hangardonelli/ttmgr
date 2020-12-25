@@ -29,9 +29,9 @@ namespace ttmgr
 
             ProcessAction pa = new ProcessAction();
 
-            Process chrome = Process.GetProcessesByName("chrome")[0];
-            Console.WriteLine(Convert.ToString(chrome.MainModule.BaseAddress.ToInt64(), 16));
-         
+            Process[] chrome = Process.GetProcessesByName("notepad");
+
+            pInfo.printProcessInformation(chrome[0], true, true, true, true, true, true);
 
 
 
