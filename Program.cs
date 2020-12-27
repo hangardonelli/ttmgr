@@ -31,12 +31,20 @@ namespace ttmgr
 
             Process[] chrome = Process.GetProcessesByName("notepad");
 
-            pInfo.printProcessInformation(chrome[0], true, true, true, true, true, true);
+            if(chrome.Length < 1)
+            {
+                Console.WriteLine("No se ha encontrado el proceso notepad ejecutandose");
+            }
+
+          
+
+            else
+            {
+                pInfo.printProcessInformation(chrome[0], true, true, true, true, true, true, true, true, true, true, true);
+            }
 
 
-
-
-
+           
 
 
 

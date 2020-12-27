@@ -93,6 +93,11 @@ namespace ttmgr
         {
             return process.StartTime;
         }
+
+        protected string getProcessFileVersion(Process process)
+        {
+            return process.MainModule.FileVersion;
+        }
        
         public string getStartingMemoryLocation(Process process, byte _base = 16)
         {
@@ -100,6 +105,12 @@ namespace ttmgr
              * Purpose: Returns the initial memory location of a specific process
              * Parameters:
              *      process: The selected process to see his initial memory location
+             * Default parameters:
+             *      _base: Set the base of numbers for representing the starting memory location where:
+             *          2: Binary,
+             *          8: Octal,
+             *          10: Decimal,
+             *          16: Hexadecimal
              */
             //Saving the memory location expressed like a 64-bits pointer into a int64 data type.
             Int64 processMemoryLocation = process.MainModule.BaseAddress.ToInt64();
@@ -241,10 +252,19 @@ namespace ttmgr
             bool showPriority = false,
             bool showPatch = false,
             bool showInstances = false, 
-            bool showWindowsTitle = false
+            bool showWindowsTitle = false,
+            bool showStartingMemoryLocation = false,
+            bool showMD5 = false,
+            bool showSHA1 = false,
+            bool showSHA256 = false, 
+            bool showSHA512 = false,
+            bool showFileVersion = false
             )
 
         {
+
+            HashHandler hs = new HashHandler();
+
             if (showID)
             {
                 Console.WriteLine($"Process ID: {getProcessID(process)}");
@@ -274,6 +294,36 @@ namespace ttmgr
             {
                 Console.WriteLine($"Main title name: {getProcessWindowsTitle(process)}");
             }
+
+            if (showStartingMemoryLocation)
+            {
+                Console.WriteLine($"Starting memory location: 0x{getStartingMemoryLocation(process)}");
+            }
+            if (showMD5)
+            {
+
+                Console.WriteLine($"File MD5: {hs.FileToMD5(getProcessPatch(process))}");
+            }
+            if (showSHA1)
+            {
+
+                Console.WriteLine($"File SHA1: {hs.FileToSHA1(getProcessPatch(process))}");
+            }
+            if (showSHA256)
+            {
+
+                Console.WriteLine($"File SHA256: {hs.FileToSHA256(getProcessPatch(process))}");
+            }
+            if (showSHA512)
+            {
+
+                Console.WriteLine($"File SHA512: {hs.FileToSHA512(getProcessPatch(process))}");
+            }
+
+            if (showFileVersion)
+            {
+                Console.WriteLine($"{getProcessFileVersion(process)}");
+            }
         }
 
 
@@ -284,6 +334,8 @@ namespace ttmgr
             bool showPatch = false, 
             bool showInstances = false, 
             bool showWindowsTitle = false
+
+            
             
             ){
                 string[] processArray = getAllProcessName(getAllProcess());
