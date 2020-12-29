@@ -40,7 +40,7 @@ namespace ttmgr
 
             else
             {
-                pInfo.printProcessInformation(chrome[0], true, true, true, true, true, true, true, true, true, true, true);
+                pInfo.printProcessInformation(chrome[0], true, true, true, true, true, true, true, true, true, true, true, true, true);
             }
 
 

@@ -96,7 +96,25 @@ namespace ttmgr
 
         protected string getProcessFileVersion(Process process)
         {
-            return process.MainModule.FileVersion;
+            return process.MainModule.FileVersionInfo.ToString();
+        }
+        protected long getProcessMemoryUsage(Process process, char _base = 'B')
+        {
+            switch (_base)
+            {
+                case 'b': //bits
+                    return process.PrivateMemorySize64 * 8;
+                case 'B': // bytes
+                    return process.PrivateMemorySize64;
+                case 'K': // kilobytes
+                    return process.PrivateMemorySize64 / 1024;
+                case 'M': // megabytes
+                    return process.PrivateMemorySize64 / (1024 * 1024);
+                case 'G': // gigabytes
+                    return process.PrivateMemorySize64 / (1024 * 1024 * 1024);
+                default: //wrong _base char
+                    return -1;
+            }
         }
        
         public string getStartingMemoryLocation(Process process, byte _base = 16)
@@ -258,7 +276,8 @@ namespace ttmgr
             bool showSHA1 = false,
             bool showSHA256 = false, 
             bool showSHA512 = false,
-            bool showFileVersion = false
+            bool showFileVersion = false,
+            bool showRAMUsage = true
             )
 
         {
@@ -320,10 +339,17 @@ namespace ttmgr
                 Console.WriteLine($"File SHA512: {hs.FileToSHA512(getProcessPatch(process))}");
             }
 
+            if (showRAMUsage)
+            {
+                Console.WriteLine($"Main Memory (RAM USAGE): {getProcessMemoryUsage(process, 'B')} bytes");
+            }
+
             if (showFileVersion)
             {
                 Console.WriteLine($"{getProcessFileVersion(process)}");
             }
+
+         
         }
 
 
